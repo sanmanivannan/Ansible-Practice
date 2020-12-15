@@ -1,5 +1,13 @@
 ---
 # handlers file for mani1
 
-- name: restart apache service
-  service: name=httpd state=restarted
+- name: stop apache service
+  service: name=httpd state=stopped
+
+- name: start apache service
+  service: name=httpd state=started
+
+
+#- name: restart apache service
+#  service: name=httpd state=restarted
+
