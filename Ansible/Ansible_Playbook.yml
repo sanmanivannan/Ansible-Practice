@@ -1,0 +1,22 @@
+Ansible Playbook
+
+
+---
+
+- name: Network Getting Started First Playbook
+  hosts: web
+
+  tasks:
+
+    - name: ping test
+      ping:
+
+    - name: Display the config
+      command: date
+
+    - copy:
+       src: /home/ansadmin/project1/inventory.txt
+       dest: /home/ansadmin
+       owner: ansadmin
+       group: ansadmin
+       mode: 0644

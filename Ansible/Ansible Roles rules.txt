@@ -1,0 +1,43 @@
+Ansible Roles
+==================
+
+cd /etc/ansible
+mkdir roles
+cd roles
+ansible-galaxy init <mani1> --offline   (where 'mani1' is the rolename which we are creating newly)
+tree
+
+├── defaults       = Data about the roles and application. Default variable
+│   └── main.yml
+ 
+├── files          = Static Files 
+├── handlers       = Triggers or Tasks which are based on some actions
+│   └── main.yml
+├── meta           = Metadata about the role
+│   └── main.yml
+├── README.md
+├── tasks          = Actual Code or Playbook 
+│   └── main.yml
+├── templates      = Dynamic Files. Jinja2 - template language
+├── tests
+│   ├── inventory
+│   └── test.yml
+└── vars           = Core Variables. Which will override defaults
+    └── main.yml
+	
+
+Create roletest.yml
+====================
+---
+
+- hosts: 54.163.58.3
+  roles:
+   - mani1
+	
+Commands for Running the role
+===============================
+ansible-playbook roletest.yml --syntax-check
+ansible-playbook roletest.yml
+
+
+

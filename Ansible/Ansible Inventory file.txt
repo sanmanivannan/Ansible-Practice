@@ -1,0 +1,4 @@
+Ansible Invetory 
+
+
+web ansible_host=35.175.135.237 ansible_connection=ssh ansible_port=22 ansible_user=ansadmin ansible_ssh_pass=password

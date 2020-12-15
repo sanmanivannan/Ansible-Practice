@@ -1,0 +1,9 @@
+-
+  name: my first playbook
+  hosts: all
+  user: ansadmin
+  
+  task:
+      - name: execute a simple 'date' command
+        command: date
+      

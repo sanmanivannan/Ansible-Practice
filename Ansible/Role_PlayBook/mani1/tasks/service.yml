@@ -1,0 +1,12 @@
+---
+#Service name
+
+- name: apache service start
+  service: 
+    name: httpd 
+    state: started
+  become: true
+  become_method: sudo 
+ 
+     
+

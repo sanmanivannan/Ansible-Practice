@@ -1,0 +1,9 @@
+---
+#Installing httpd package
+
+- name: Installing httpd package
+  yum:
+   name: httpd
+   state: latest
+  become: true
+  become_method: sudo

@@ -1,0 +1,15 @@
+---
+
+#Configuring httpd and sending sample html file
+
+#- name:configure copy the httpd conf and sample html file
+#  copy: src=httpd.conf dest=/etc/httpd/conf/httpd.conf
+#  notify:
+#   - restart apache service
+
+- name: copy index.html
+  copy: 
+    src: index.html 
+    dest:  /var/www/html/index.html
+  become: true
+  become_method: sudo

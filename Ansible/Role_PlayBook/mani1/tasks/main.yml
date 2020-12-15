@@ -1,0 +1,6 @@
+---
+# tasks file for mani1
+
+- include: install.yml
+- include: configure.yml
+- include: service.yml
