@@ -1,0 +1,27 @@
+Ansible Ad-Hoc commands
+========================
+
+ansible servers -m ping
+
+
+ansible servers -a "uptime"
+
+
+To know the list of modules in ansible we can execute the list of commands
+===========================================================================
+ansible-doc -l 
+
+ansible-doc modulename
+
+ansible-doc user
+
+
+without using the module we can perform some operations on ad-hoc
+====================================================================
+
+ansible all -a "yum -y install httpd"
+
+with using the module, performing the ad-hoc commands
+=====================================================
+
+ansible all -m yum -a "name=httpd state=present"

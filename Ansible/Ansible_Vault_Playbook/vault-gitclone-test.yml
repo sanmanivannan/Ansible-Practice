@@ -1,0 +1,12 @@
+- name: This play book is to test the ansible vault functionality for cloning the git repo using the username and password
+  hosts: all
+  user: ansadmin
+  become: true
+  vars_files:
+   - test-vault.yml  
+  tasks:
+   - name: clone the git repo
+     git:
+       repo: https://sanmanivannan:{{ password }}@github.com/sanmanivannan/helloworld.git 
+       dest: /home/ansadmin/gitclonetmp    
+       version: master

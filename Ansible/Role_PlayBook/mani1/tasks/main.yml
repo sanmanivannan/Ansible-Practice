@@ -1,6 +1,8 @@
 ---
 # tasks file for mani1
 
+# we can either use include: or import_tasks:
+
 - include: install.yml
 - include: configure.yml
 - include: service.yml

@@ -1,0 +1,25 @@
+Ansible-Vault
+==============
+Creating a new file with encryption
+------------------------------------- 
+ansible-vault create new-pass.yml
+
+view the file encrypted file
+----------------------------
+ansible-vault view new-pass.yml
+
+edit the file encrypted file
+-------------------------------
+ansible-vault edit new-pass.yml
+
+Encrupt a existing non-encrypt file
+------------------------------------
+ansible-vault encrypt existing-file.yml
+
+Decrupt a file
+----------------
+ansible-vault decrypt existing-file.yml
+
+
+
+

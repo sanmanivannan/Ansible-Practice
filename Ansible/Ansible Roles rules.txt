@@ -37,7 +37,13 @@ Create roletest.yml
 Commands for Running the role
 ===============================
 ansible-playbook roletest.yml --syntax-check
+ansible-playbook roletest.yml --check
+ansible-playbook roletest.yml --list-hosts
 ansible-playbook roletest.yml
+
+
+ansible-playbook roletest.yml --ask-vault-pass
+ansible-playbook roletest.yml --vault-password-file
 
 
 
