@@ -1,0 +1,16 @@
+---
+  
+- name: test template run
+  hosts: 3.86.208.114
+  user: ansadmin
+  vars: 
+    env: staging
+  tasks:
+    - name: copy the j2 template to the remote node
+      template:
+        src: ans-conf-file.j2
+        dest: /home/ansadmin/ans-conf-file
+#        user: ansadmin
+#        group: ansadmin
+        mode: 0600
+      become: true
