@@ -32,7 +32,7 @@
         name: httpd
         state: latest
 
-    - name: UNInstall the latest version of Apache
+    - name: Uninstall the latest version of Apache
       become: true
       become_method: sudo
       yum:

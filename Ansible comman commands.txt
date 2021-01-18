@@ -1,0 +1,129 @@
+Ansible comman commands
+========================
+
+Step#1
+1. Have the Machine/workstation which will be used as ansible controller/server
+2. have the traget machine(s) which needs to be controlled
+
+Step#2
+1.On the ansible server/controller machine create a ssh key by using 
+
+ssh-keygen -t ed25519 -C "Comments for the new ansiblekey" mostly without the passphrase if you only use within the company network
+provide the name of the key as "ansible/anything you like"
+
+public key and private ssh key would be created now on the ~/.ssh folder
+
+2.Copy the ssh public key keyname.pub to the client machines
+
+ssh-copy-id -i ~/.ssh/keyname.pub <clientmachine IP address>
+
+Now, the ssh connections between the ansible server and the client machines are established
+
+Step#3
+Setup the Git and Github repository if we dont have one just to maintain the ansible codes
+
+1. on the server machine check whether you have git installed on it(most of the linux distros have the git preinstalled. If not we may need to install)
+
+which git
+this command will display the path in whcih the git is available. 
+If we dont get any update that means the server doesnt have git installed
+In that case, we need to manually install git in the server using this command
+
+yum update
+yum install git(git will be installed into the server)
+git --version (or) which git (to check the git installation)
+
+2. Setting up the git repository on the github.com
+Once the repository is setup, copy the link of repositoy
+
+Add the servers public which we created earlier to the github
+
+3. On the local server,
+which git
+git --version
+git clone <git repo url>
+
+add a readme.md file using nano or any editor
+
+git config --global user.name "name"
+git config --global user.email "email"
+git status
+git add readme.md
+git status
+git diff readme.md
+git commit -m "comment"
+git push origin master
+
+Step#4
+1. Installing Ansible on the server/controller machine 
+
+yum update
+ansible --version
+sudo yum install ansible -y
+
+Step#5
+1. Create the inventory file on the ansible folder/repo which we cloned
+
+cd ansible-tutorial
+nano inventory
+On the inventory file add all the server which we wanted to control from the ansible
+add,commit and push the chnages into the github
+
+Step#6
+1. Running the ad-hoc ansible commands from our ansible controller terminal
+
+ansible add --key-file ~/.ssh/ansible -i inventory -m ping
+
+Step#7
+1. creating ansible.cfg file in the local ansible-code working directory
+
+nano ansible.cfg
+
+[default]
+inventory = inventory
+private_key_file = ~/.ssh/ansible
+
+IMPORTANT NOTE: By default, when we install ansible to a server, we would have ansible.cfg file on the /etc/ansible directory.
+If we create a ansible.cfg again manually on the ansible-code working directory, this will override the config on the /etc/ansible/ansible.cfg file
+
+After which the ad-hoc command which we used on Step#6 will be substancially reduced like this
+
+ansible all -m ping 
+
+
+Ad-Hoc Commands
+----------------
+ansible all --key-file ~/.ssh.ansiblekey -i inventory -m ping
+(or)
+ansible all -m ping (id we have updated the local ansible.cfg file)
+
+ansible all --list-hosts
+
+ansible all -m gather_facts --limit <ipaddress>
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

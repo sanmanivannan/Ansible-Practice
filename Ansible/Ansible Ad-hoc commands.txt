@@ -1,20 +1,34 @@
-Ansible Ad-Hoc commands
-========================
+Ad-Hoc Commands
+----------------
+ansible all --key-file ~/.ssh.ansiblekey -i inventory -m ping
+(or)
+ansible all -m ping (id we have updated the local ansible.cfg file)
+
+ansible all --list-hosts
+
+ansible all -m gather_facts --limit <ipaddress>
 
 ansible servers -m ping
 
+Elevated Ad-hoc Commands 
+------------------------
+equivalent to running "sudo apt update"
+ansible all -m apt -a update_cache=true --become --ask-become-pass
 
+equivalent to running :sudo apt install vim-nox
+ansible all -m apt -a name=vim-nox --become --ask-become-pass
+
+For installing tmux tool
+ansible all -m apt -a name=tmux --become --ask-become-pass
+
+This command will make sure that the snapd latest package is installed
+ansible all -m apt -a "name=snapd state=latest" --become --ask-become-pass
+
+To upgrade all the package on the dist
+ansible all -m apt -a "upgrade=dist" --become --ask-become-pass
+
+To know the uptime of the servers
 ansible servers -a "uptime"
-
-
-To know the list of modules in ansible we can execute the list of commands
-===========================================================================
-ansible-doc -l 
-
-ansible-doc modulename
-
-ansible-doc user
-
 
 without using the module we can perform some operations on ad-hoc
 ====================================================================
@@ -25,3 +39,13 @@ with using the module, performing the ad-hoc commands
 =====================================================
 
 ansible all -m yum -a "name=httpd state=present"
+
+
+To know the list of modules in ansible we can execute the list of commands
+===========================================================================
+ansible-doc -l 
+
+ansible-doc modulename
+
+ansible-doc user
+
