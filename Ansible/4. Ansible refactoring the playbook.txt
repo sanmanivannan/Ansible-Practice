@@ -1,0 +1,44 @@
+#Refactoring out ansible palybook from multiple plays to as minimal plays as possible, Look for the 'when condition playbook'
+
+---
+
+- hosts: all
+  become: true
+  tasks:
+  
+  - name: install apache2 package to Ubantu server
+    apt:
+	  name: 
+	    - apache2
+		- libapache2-mod-php
+	  state: latest
+	  update_cache: yes
+	when: ansible_distribution == "Ubuntu" 
+	
+   
+  - name: install apache2 package to centOs server
+    yum:
+	  name: 
+	    - httpd
+		- php
+	  state: latest
+	  update_cache: yes
+	when: ansible_distribution == "CentOS" 
+	
+==========================================================================================
+
+---
+
+- hosts: all
+  become: true
+  tasks:
+  
+  - name: install apache and php package
+    package:
+	  name: 
+	    - {{ apache_package }} # this is the variable name, add the actual package name on the inventory file against each host corresponding to its OS
+		- {{ php_package }}    # this is the variable name, add the actual package name on the inventory file against each host corresponding to its OS 
+	  state: latest
+	  update_cache: yes
+	
+   

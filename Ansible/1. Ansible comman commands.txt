@@ -55,15 +55,16 @@ git commit -m "comment"
 git push origin master
 
 Step#4
-1. Installing Ansible on the server/controller machine 
+1. Installing Ansible on the server/controller machine (which is debian/ubantu distros) 
 
-yum update
+apt update
 ansible --version
-sudo yum install ansible -y
+sudo apt install ansible -y
 
 Step#5
 1. Create the inventory file on the ansible folder/repo which we cloned
 
+mkdir ansible-tutorial
 cd ansible-tutorial
 nano inventory
 On the inventory file add all the server which we wanted to control from the ansible
@@ -75,7 +76,7 @@ Step#6
 ansible add --key-file ~/.ssh/ansible -i inventory -m ping
 
 Step#7
-1. creating ansible.cfg file in the local ansible-code working directory
+1. creating ansible.cfg file in the local ansible-tutorial working directory
 
 nano ansible.cfg
 
@@ -93,7 +94,7 @@ ansible all -m ping
 
 Ad-Hoc Commands
 ----------------
-ansible all --key-file ~/.ssh.ansiblekey -i inventory -m ping
+ansible all --key-file ~/.ssh/ansiblekey -i inventory -m ping
 (or)
 ansible all -m ping (id we have updated the local ansible.cfg file)
 

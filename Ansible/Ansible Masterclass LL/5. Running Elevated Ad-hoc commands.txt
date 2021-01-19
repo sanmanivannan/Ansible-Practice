@@ -1,0 +1,25 @@
+Getting Started with Ansible 05 - Running elevated Commands
+Jump to navigationJump to search
+
+Contents
+1	Overview
+1.1	Tell ansible to use sudo (become)
+1.2	Install a package via the apt module
+1.3	Install a package via the apt module, and also make sure it's the latest version available
+1.4	Upgrade all the package updates that are available
+Overview
+Ansible is an incredible configuration management and provisioning utility that enables you to automate all the things. In this series, you'll learn everything you need to know in order to use Ansible for your day-to-day administration duties. In the fifth video, we take a look at more ad-hoc commands - but this time, commands that perform changes.
+
+Relevant Links
+Original Video
+Tell ansible to use sudo (become)
+ansible all -m apt -a update_cache=true --become --ask-become-pass
+
+Install a package via the apt module
+ansible all -m apt -a name=vim-nox --become --ask-become-pass
+
+Install a package via the apt module, and also make sure it's the latest version available
+ansible all -m apt -a "name=snapd state=latest" --become --ask-become-pass
+
+Upgrade all the package updates that are available
+ansible all -m apt -a upgrade=dist --become --ask-become-passxx

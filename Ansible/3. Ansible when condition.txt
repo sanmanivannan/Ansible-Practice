@@ -1,0 +1,50 @@
+#when condition
+# TO KNOW THE ATTRIBUTES ASSOCIATED TO A SERVER OR SET OF SERVERS, USE THIS COMMAND
+gathering facts about a server/instance
+========================================
+
+ansible all gather_facts --limit <server-ip> | grep ansible_distribution  
+
+=======================================================================================================
+---
+
+- hosts: all
+  become: true
+  tasks:
+  
+  - name: updatre repo index
+    apt:
+      update_cache: yes
+	when: ansible_distribution in ["Ubuntu","Debian"] 
+  
+  - name: install apache2 package
+    apt:
+	  name: apache2
+	  state: latest
+	when: ansible_distribution == "Ubuntu" 
+	
+  - name: add php support for apache
+    apt:
+	  name: libapache2-mod-php
+	  state: latest
+    when: ansible_distribution == "Ubuntu "	  
+	
+  - name: updatre repo index
+    yum:
+      update_cache: yes
+	when: ansible_distribution in ["CentOS"] 
+   
+  - name: install apache2 package
+    yum:
+	  name: httpd
+	  state: latest
+	when: ansible_distribution == "CentOS" 
+	
+  - name: add php support for apache
+    yum:
+	  name: php
+	  state: latest
+    when: ansible_distribution == "CentOS"	 
+  
+	
+

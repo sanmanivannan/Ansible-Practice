@@ -1,0 +1,32 @@
+Getting Started with Ansible 02 - SSH overview & Setup
+Jump to navigationJump to search
+
+Contents
+1	Overview
+1.1	Generate an ssh key
+1.2	Copy the ssh key to the server(s)
+1.3	Generate an ssh key that's going to be specifically used for Ansible
+1.4	Copy the ssh key to the server(s)
+1.5	Use an SSH key to connect to a server
+1.6	To cache the passphrase for our session, we can use the ssh agent
+1.7	Here's an alias you can put in your .bashrc, to simplify it
+Overview
+Ansible is an incredible configuration management and provisioning utility that enables you to automate all the things. In this series, you'll learn everything you need to know in order to use Ansible for your day-to-day administration duties. In the second episode, we take a look at some foundational knowledge, specifically OpenSSH which is required for Ansible to work.
+
+Relevant Links
+Original Video
+Generate an ssh key
+ ssh-keygen -t ed25519 -C "jay default"
+Copy the ssh key to the server(s)
+ ssh-copy-id -i ~/.ssh/id_ed25519.pub <IP Adderss>
+Generate an ssh key that's going to be specifically used for Ansible
+ ssh-keygen -t ed25519 -C "ansible"
+Copy the ssh key to the server(s)
+ ssh-copy-id -i ~/.ssh/ansible.pub
+Use an SSH key to connect to a server
+ ssh -i .ssh/<key_name> <IP Address>
+To cache the passphrase for our session, we can use the ssh agent
+ eval $(ssh-agent)
+ ssh-add
+Here's an alias you can put in your .bashrc, to simplify it
+ alias ssha='eval $(ssh-agent) && ssh-add'

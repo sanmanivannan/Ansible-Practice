@@ -28,7 +28,13 @@ To upgrade all the package on the dist
 ansible all -m apt -a "upgrade=dist" --become --ask-become-pass
 
 To know the uptime of the servers
-ansible servers -a "uptime"
+ansible <specific-servers or specific-group> -a "uptime"
+
+gathering facts about a server/instance
+========================================
+
+ansible all gather_facts --limit <server-ip> | grep ansible_distribution  
+
 
 without using the module we can perform some operations on ad-hoc
 ====================================================================

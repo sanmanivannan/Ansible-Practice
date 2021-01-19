@@ -20,7 +20,7 @@ Installing Ansible as user(here its ansadmin user) in the controller machine
 	1	pip3 install ansible --user
     2 	ansible --version
 	3	ssh-keygen
-	4	ssh-copy-id ansadmin@<ipaddress>
+	4	ssh-copy-id -i ~/.ssh/ansible ansadmin@<ipaddress>
     5  sudo mkdir /etc/ansible
     6  cd /etc/ansible
     7  sudo vi hosts ----->>add the node(s) ip address/hostname
@@ -33,11 +33,7 @@ Installing Ansible as user(here its ansadmin user) in the controller machine
    Test the Ansible Ping test
    
    1	ansible all -m ping
-   
-
- 
-   
-   
+    
    
 
 Ansible Node Config:

@@ -1,0 +1,50 @@
+Getting Started with Ansible 04 - Executing ad-hoc Commands
+Jump to navigationJump to search
+
+Contents
+1	Overview
+1.1	Install ansible
+1.2	Create an inventory file (add the IP address for each server on its own line)
+1.3	Add the inventory file to version control
+1.4	Commit the changes
+1.5	Push commit to Github
+1.6	Test Ansible is working
+1.7	Create ansible config file
+1.8	Now the ansible command can be simplified
+1.9	List all of the hosts in the inventory
+1.10	Gather facts about your hosts
+1.11	Gather facts about your hosts, but limit it to just one host
+Overview
+Ansible is an incredible configuration management and provisioning utility that enables you to automate all the things. In this series, you'll learn everything you need to know in order to use Ansible for your day-to-day administration duties. In the fourth episode, we install Ansible and use it to run some ad-hoc commands.
+
+Relevant Links
+Original Video
+Install ansible
+ sudo apt update
+ sudo apt install ansible
+Create an inventory file (add the IP address for each server on its own line)
+ 172.16.250.132
+ 172.16.250.133
+ 172.16.250.134
+Add the inventory file to version control
+ git add inventory
+Commit the changes
+ git commit -m "first version of the inventory file, added three hosts."
+Push commit to Github
+ git push origin master
+Test Ansible is working
+ ansible all --key-file ~/.ssh/ansible -i inventory -m ping
+Create ansible config file
+ nano ansible.cfg
+ 
+ [defaults]
+ inventory = inventory
+ private_key_file = ~/.ssh/ansible
+Now the ansible command can be simplified
+ ansible all -m ping
+List all of the hosts in the inventory
+ ansible all --list-hosts
+Gather facts about your hosts
+ ansible all -m gather_facts
+Gather facts about your hosts, but limit it to just one host
+ ansible all -m gather_facts --limit 172.16.250.132

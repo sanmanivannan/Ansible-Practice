@@ -1,0 +1,91 @@
+Getting Started with Ansible 10 - Tags
+Jump to navigationJump to search
+
+Contents
+1	Overview
+1.1	site.yml (with tags added)
+1.2	List the available tags in a playbook
+1.3	Examples of running a playbook but targeting specific tags
+Overview
+Ansible is an incredible configuration management and provisioning utility that enables you to automate all the things. In this series, you'll learn everything you need to know in order to use Ansible for your day-to-day administration duties. In video 10, we learn how to add tags to our plays that can make it easier to target specific things when we don't want to run the entire playbook each time.
+
+Relevant Links
+Original Video
+site.yml (with tags added)
+ ---
+ 
+ - hosts: all
+   become: true
+   pre_tasks:
+ 
+   - name: install updates (CentOS)
+     tags: always
+     dnf:
+       update_only: yes
+       update_cache: yes
+     when: ansible_distribution == "CentOS"
+ 
+   - name: install updates (Ubuntu)
+     tags: always
+     apt:
+       upgrade: dist
+       update_cache: yes
+     when: ansible_distribution == "Ubuntu"
+ 
+ 
+ - hosts: web_servers
+   become: true
+   tasks:
+ 
+   - name: install httpd package (CentOS)
+     tags: apache,centos,httpd
+     dnf:
+       name:
+         - httpd
+         - php
+       state: latest
+     when: ansible_distribution == "CentOS"
+ 
+   - name: install apache2 package (Ubuntu)
+     tags: apache,apache2,ubuntu
+     apt:
+       name:
+         - apache2
+         - libapache2-mod-php
+       state: latest
+     when: ansible_distribution == "Ubuntu"
+ 
+ - hosts: db_servers
+   become: true
+   tasks:
+ 
+   - name: install mariadb server package (CentOS)
+     tags: centos,db,mariadb
+     dnf:
+       name: mariadb
+       state: latest
+     when: ansible_distribution == "CentOS"
+ 
+   - name: install mariadb server
+     tags: db,mariadb,ubuntu
+     apt:
+       name: mariadb-server
+       state: latest
+     when: ansible_distribution == "Ubuntu"
+ 
+ - hosts: file_servers
+   tags: samba
+   become: true
+   tasks:
+ 
+   - name: install samba package
+     tags: samba
+     package:
+       name: samba
+       state: latest
+List the available tags in a playbook
+ ansible-playbook --list-tags site_with_tags.yml
+Examples of running a playbook but targeting specific tags
+ ansible-playbook --tags db --ask-become-pass site_with_tags.yml
+ ansible-playbook --tags centos --ask-become-pass site_with_tags.yml
+ ansible-playbook --tags apache --ask-become-pass site_with_tags.yml

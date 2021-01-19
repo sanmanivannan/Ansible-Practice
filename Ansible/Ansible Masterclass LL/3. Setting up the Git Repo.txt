@@ -1,0 +1,33 @@
+Getting Started with Ansible 03 - Setting up the Git Repo
+Jump to navigationJump to search
+
+Contents
+1	Overview
+1.1	Check if git is installed
+1.2	Install git
+1.3	Create user config for git
+1.4	Check the status of your git repository
+1.5	Stage the README.md file (after making changes) to be included in the next git commit
+1.6	Set up the README.md file to be included in a commit
+1.7	Send the commit to Github
+Overview
+Ansible is an incredible configuration management and provisioning utility that enables you to automate all the things. In this series, you'll learn everything you need to know in order to use Ansible for your day-to-day administration duties. In part 3, we take a look at another foundational concept - Git. Everyone who effectively implements automation uses Git, and in this video, we look into creating a repository and how to push changes.
+
+Relevant Links
+Original Video
+Check if git is installed
+ which git
+Install git
+ sudo apt update
+ sudo apt install git
+Create user config for git
+ git config --global user.name "First Last"
+ git config --global user.email "somebody@somewhere.net"
+Check the status of your git repository
+ git status
+Stage the README.md file (after making changes) to be included in the next git commit
+ git add README.md
+Set up the README.md file to be included in a commit
+ git commit -m "Updated readme file, initial commit"
+Send the commit to Github
+ git push origin master
